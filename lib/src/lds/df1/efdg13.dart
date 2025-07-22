@@ -1,7 +1,6 @@
 // Created by Crt Vavros, copyright © 2022 ZeroPass. All rights reserved.
 // ignore_for_file: constant_identifier_names
 import 'dart:convert';
-import 'dart:developer';
 import 'dart:typed_data';
 
 import 'package:dmrtd/dmrtd.dart';
@@ -77,7 +76,7 @@ class EfDG13 extends DataGroup {
           optionalDetails[key] = value;
         }
       }
-      log("Parsed optional details: $optionalDetails", name: "EfDG13");
+
       // Convert the optional details to PersonalInfo object
       _personalInfo = OtherPersonalInfo.fromMap(optionalDetails);
     } catch (e) {
