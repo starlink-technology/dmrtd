@@ -4,10 +4,10 @@
 import 'dart:convert';
 import 'dart:core';
 import 'dart:typed_data';
-import 'package:dmrtd/extensions.dart';
 
-import 'package:dmrtd/src/lds/tlv.dart';
+import 'package:dmrtd/extensions.dart';
 import 'package:dmrtd/src/lds/ef.dart';
+import 'package:dmrtd/src/lds/tlv.dart';
 
 import 'dg.dart';
 
@@ -17,6 +17,7 @@ class EfDG11 extends DataGroup {
   static const TAG = DgTag(0x6B);
 
   static const FULL_NAME_TAG = 0x5F0E;
+  static const MOTHER_NAME_TAG = 0xA0;
   static const OTHER_NAME_TAG = 0x5F0F;
   static const PERSONAL_NUMBER_TAG = 0x5F10;
 
@@ -43,6 +44,7 @@ class EfDG11 extends DataGroup {
   static const TAG_LIST_TAG = 0x5c;
 
   String? _nameOfHolder;
+  String? _motherName;
   final _otherNames = <String>[];
   String? _personalNumber;
   DateTime? _fullDateOfBirth;
@@ -53,10 +55,11 @@ class EfDG11 extends DataGroup {
   String? _title;
   String? _personalSummary;
   Uint8List? _proofOfCitizenship;
-  var _otherValidTDNumbers = <String>[];
+  final _otherValidTDNumbers = <String>[];
   String? _custodyInformation;
 
   String? get nameOfHolder => _nameOfHolder;
+  String? get motherName => _motherName;
   List<String> get otherNames => _otherNames;
   String? get personalNumber => _personalNumber;
   DateTime? get fullDateOfBirth => _fullDateOfBirth;
@@ -105,6 +108,9 @@ class EfDG11 extends DataGroup {
       switch (uvtv.tag.value) {
         case FULL_NAME_TAG:
           _nameOfHolder = utf8.decode(uvtv.value);
+          break;
+        case MOTHER_NAME_TAG:
+          _motherName = utf8.decode(uvtv.value);
           break;
         case PERSONAL_NUMBER_TAG:
           _personalNumber = utf8.decode(uvtv.value);
