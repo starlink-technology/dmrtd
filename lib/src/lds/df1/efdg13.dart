@@ -13,7 +13,7 @@ class EfDG13 extends DataGroup {
   static const TAG_LIST_TAG = 0x5c;
 
   // Store parsed optional details
-  OtherPersonalInfo? _personalInfo;
+  OtherPersonalInfo? _otherPersonalInfo;
 
   EfDG13.fromBytes(Uint8List data) : super.fromBytes(data);
 
@@ -26,7 +26,7 @@ class EfDG13 extends DataGroup {
   @override
   int get tag => TAG.value;
 
-  OtherPersonalInfo? get personalInfo => _personalInfo;
+  OtherPersonalInfo? get otherPersonalInfo => _otherPersonalInfo;
 
   @override
   void parse(Uint8List content) {
@@ -78,7 +78,7 @@ class EfDG13 extends DataGroup {
       }
 
       // Convert the optional details to PersonalInfo object
-      _personalInfo = OtherPersonalInfo.fromMap(optionalDetails);
+      _otherPersonalInfo = OtherPersonalInfo.fromMap(optionalDetails);
     } catch (e) {
       print('Error other parsing optional data field: $e');
     }
